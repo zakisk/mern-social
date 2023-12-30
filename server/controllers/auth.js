@@ -47,7 +47,7 @@ export const login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ msg: "User doesn't exist" });
 
-    const token = jwt.sign(user._id, process.env.JWT_SECRET);
+    const token = jwt.sign(JSON.stringify(user._id), process.env.JWT_SECRET);
     delete user.password;
     res.status(200).json({ token, user });
   } catch (err) {
