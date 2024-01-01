@@ -4,8 +4,9 @@ import User from "../models/user.js";
 // CREATE
 export const createPost = async (req, res) => {
   try {
-    const { userId, description, picturepath } = req.body;
-    const user = User.findById(userId);
+    const { userId, description, picturePath } = req.body;
+    console.log(`userId: ${userId}`);
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ error: "User not found." });
     }
@@ -16,8 +17,8 @@ export const createPost = async (req, res) => {
       lastName: user.lastName,
       location: user.location,
       description,
-      picturepath,
-      userPicturePath: user.picturepath,
+      picturePath,
+      userPicturePath: user.picturePath,
       likes: {},
       comments: [],
     });
@@ -26,6 +27,7 @@ export const createPost = async (req, res) => {
     const post = await Post.find();
     res.status(201).json(post);
   } catch (err) {
+    console.log(err);
     res.status(500).json({ error: err.message });
   }
 };

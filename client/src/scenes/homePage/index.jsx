@@ -2,6 +2,7 @@ import { Box, useMediaQuery } from "@mui/material";
 import Navbar from "../navbar/index.jsx";
 import UserWidget from "../widgets/UserWidget.jsx";
 import { useSelector } from "react-redux";
+import CreatePostWidget from "../widgets/CreatePostWidget.jsx";
 
 const HomePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
@@ -24,7 +25,7 @@ const HomePage = () => {
         flexBasis={isNonMobileScreens ? "42%" : undefined}
         mt={isNonMobileScreens ? undefined : "2rem"}
         >
-
+          <CreatePostWidget picturePath={picturePath} />
         </Box>
         { isNonMobileScreens && (
           <Box flexBasis="26%"></Box>

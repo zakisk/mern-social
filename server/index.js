@@ -47,6 +47,7 @@ app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
+app.use("/posts", postRoutes);
 
 // DATABASE SETUP
 const PORT = process.env.PORT || 6001;
