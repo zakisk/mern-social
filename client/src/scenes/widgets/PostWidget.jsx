@@ -27,8 +27,12 @@ const PostWidget = ({
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const loggedInUserId = useSelector((state) => state.user._id);
-  const isLiked = Boolean(likes[loggedInUserId]);
-  const likesCount = Object.keys(likes).length;
+  var isLiked = false;
+  var likesCount = 0;
+  if (likes != null) {
+    isLiked = Boolean(likes[loggedInUserId]);
+    likesCount = Object.keys(likes).length;
+  }
 
   const { palette } = useTheme();
   const main = palette.neutral.main;
@@ -72,7 +76,6 @@ const PostWidget = ({
       )}
       <FlexBetween mt="0.25rem">
         <FlexBetween gap="1rem">
-
           <FlexBetween gap="0.3rem">
             <IconButton onClick={patchLike}>
               {isLiked ? (
@@ -88,7 +91,7 @@ const PostWidget = ({
             <IconButton onClick={() => setIsComments(!isComments)}>
               <ChatBubbleOutlineOutlined />
             </IconButton>
-            <Typography>{comments.length}</Typography>
+            <Typography>{comments != null ? comments.length : 0}</Typography>
           </FlexBetween>
         </FlexBetween>
 
@@ -97,7 +100,7 @@ const PostWidget = ({
         </IconButton>
       </FlexBetween>
 
-      {isComments && (
+      {isComments && comments != null && (
         <Box mt="0.5rem">
           {comments.map((comment, i) => (
             <Box key={`${name}-${i}`}>

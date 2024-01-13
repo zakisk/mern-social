@@ -63,7 +63,6 @@ const Form = () => {
     });
 
     const loggedIn = await loggedUserResponse.json();
-    console.log(loggedUserResponse);
 
     if (loggedUserResponse.ok) {
       dispatch(
